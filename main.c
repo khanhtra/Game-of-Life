@@ -6,14 +6,6 @@
 
 int main (int argc, char* argv[]){
 
-int OneOrTwo = atoi (argv[1]);
-char* path = argv[2];
-int rows;
-int cols;
-unsigned char temp;
-struct ca_data* test;
-char ch;
-
 
 unsigned char ruleCA(struct ca_data* caData, int x, int y){
 
@@ -21,7 +13,6 @@ int count = 0;
 int value;
 int bottom, top, left, right;
 int temp = 0;
-
 
 top = (caData->height + y - 1) % caData->height;
 bottom = (caData->height + y + 1) % caData->height;
@@ -35,10 +26,10 @@ right = (caData->width + x + 1) % caData->width;
 
 	
 	
-	if (caData->cadata[x][y] == 0 && count == 3){
+	if (caData->cadata[y][x] == 0 && count == 3){
 	value = 1;
 	}
-	if (caData->cadata[x][y] == 1 && (count == 2 || count == 3)){
+	else if (caData->cadata[y][x] == 1 && (count == 2 || count == 3)){
 	value = 1;
 	}
 	else{
@@ -48,11 +39,28 @@ right = (caData->width + x + 1) % caData->width;
 	return value;
 	
 }
+
+int OneOrTwo = atoi (argv[1]);
+char* path = argv[2];
+int rows;
+int cols;
+unsigned char temp;
+struct ca_data* test;
+char ch;
+
 /*
 struct ca_data* testt;
-testt = create2DCA(5,5,2);
+testt = create2DCA(5,5,0);
+set2DCACell(testt,3,2,1);
+set2DCACell(testt,3,3,1);
+set2DCACell(testt,3,4,1);
+displayCA(testt);
+printf("\n");
+for (int i = 0; i < 5; i++){
 step2DCA(testt, ruleCA);
 displayCA(testt);
+printf("\n");
+}
 */
 
 FILE *ptr = fopen(path, "r");
@@ -85,10 +93,13 @@ test->wrap = 1;
 for (unsigned int i = 0; i < test->height; i++){
 	for (unsigned int j = 0; j < test->width; j++){
 		fscanf(ptr, "%u", &temp);
+		//printf("%u", temp);
 		set2DCACell(test,j, i, temp);
 	}
 
 }
+/*Close file after reading*/
+fclose(ptr);
 displayCA(test);
 
 /*While user input is not a char, step through CA every time enter is pressed*/
@@ -100,15 +111,11 @@ do {
 	if (isalpha(ch)){
 		break;
 }
-	//step2DCA(test, ruleCA);
+	//step2DCA(test, &ruleCA);
 	displayCA(test);
 }
 while (ch != 'c');	
 
-
-/*
-/*Close file after reading*/
-fclose(ptr);
 return 0;
 }
 }

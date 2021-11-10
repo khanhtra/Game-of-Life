@@ -143,10 +143,8 @@ for (int i = 0; i < ca->width; i++){
 	ca->cadata[j][i] = copyArray[j][i];
 }
 }
-
-//caData->cadata[2][2] = 
 }
-
+/*
 unsigned char ruleCA(struct ca_data* caData, int x, int y){
 
 int count = 0; 

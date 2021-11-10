@@ -15,10 +15,7 @@ The program now supports a 2D array simulation of Conway's Game of Life. The use
 
 The program has methods for a 1D array as well, but the main program will not simulate this currently.
 
-The code follows these sets of rules for the Game of Life for each simulation: 
-- _Any live cell with 2 or 3 neighbors surive._
-- _Any dead cell with 3 or more neighbors become a dead cell._
-- _Otherwise, cells will die in the next iteration._
+
 
 **Special Notes**
 
@@ -26,8 +23,7 @@ The code follows these sets of rules for the Game of Life for each simulation:
 
 0: Represents "dead" cells
 
-Neighbors are the numbers around a cell at location (x,y). 
-Wrapping logic is included in the code.
+
 
 
 

@@ -4,9 +4,6 @@
 #include <string.h>
 #include <ctype.h>
 
-int main (int argc, char* argv[]){
-
-
 unsigned char ruleCA(struct ca_data* caData, int x, int y){
 
 int count = 0; 
@@ -40,13 +37,18 @@ right = (caData->width + x + 1) % caData->width;
 	
 }
 
+int main (int argc, char* argv[]){
+
+
+
 int OneOrTwo = atoi (argv[1]);
 char* path = argv[2];
 int rows;
 int cols;
-unsigned char temp;
+int temp;
 struct ca_data* test;
 char ch;
+
 
 /*
 struct ca_data* testt;
@@ -68,7 +70,7 @@ FILE *ptr = fopen(path, "r");
 /*Error Checking*/
 if (ptr == NULL){
 
-	printf("Error!\n");
+	printf("Error! File could not be found!\n");
 	exit(1);
 }
 if (OneOrTwo == 2){
@@ -86,15 +88,17 @@ printf("\n");
 
 test->height = rows;
 test->width = cols;
+//printf("Height: %d, Width: %d \n\n ", test->height, test->width);
 
 test = create2DCA(test->width, test->height, 0);
 test->wrap = 1;
 
 for (unsigned int i = 0; i < test->height; i++){
 	for (unsigned int j = 0; j < test->width; j++){
-		fscanf(ptr, "%u", &temp);
+		fscanf(ptr, "%d", &temp);
 		//printf("%u", temp);
-		set2DCACell(test,j, i, temp);
+		set2DCACell(test, j, i, temp);
+		//printf("%u", test->cadata[i][j]);
 	}
 
 }
@@ -111,13 +115,17 @@ do {
 	if (isalpha(ch)){
 		break;
 }
-	//step2DCA(test, &ruleCA);
+	step2DCA(test, &ruleCA);
 	displayCA(test);
 }
-while (ch != 'c');	
+while (ch != 'c');
 
-return 0;
+
 }
+else if (OneOrTwo != 2){
+	printf("This program only works for 2DCA! Please enter 2 for the first parameter!\n");
+	}
+	return 0;
 }
 
 

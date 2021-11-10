@@ -134,6 +134,7 @@ for (int i = 0; i < ca->width; i++){
 for (int i = 0; i < ca->width; i++){
 	for (int j = 0; j < ca->height; j++){
 	copyArray[j][i] = rule(ca, i,j);
+	//printf("%d %d \n", i, j); 
 }
 }
 //copyArray[0][0] = rule(ca, 0, 0);

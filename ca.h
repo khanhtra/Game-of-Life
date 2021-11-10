@@ -6,16 +6,24 @@ struct ca_data
 {
 int cells;
 unsigned char initialState;
-unsigned char* arrayP;
-unsigned char arrayTest[3];
+unsigned char** cadata;
+int width;
+int height;
+unsigned char arrayTest[3]; //delete later
 int stateAmount;
-int wrapState;
+unsigned char wrap;
+unsigned char dimension;
 
 };
-void display1DCA(struct ca_data*);
-int set1DCA(struct ca_data*, unsigned int, unsigned char);
-void init1DCA(struct ca_data*, int);
+void displayCA(struct ca_data*);
+int set1DCACell(struct ca_data*, unsigned int, unsigned char);
+int set2DCACell(struct ca_data*, unsigned int, unsigned int, unsigned char);
+void initCA(struct ca_data*, int);
+
 struct ca_data* create1DCA(int, unsigned char);
-void stepCA (struct ca_data*, unsigned char(*) (struct ca_data*, int), int);
+struct ca_data* create2DCA(int, int, unsigned char);
+
+void step1DCA (struct ca_data*, unsigned char(*) (struct ca_data*, int));
+void step2DCA (struct ca_data*, unsigned char(*) (struct ca_data*, int, int));
 
 #endif

@@ -4,117 +4,114 @@
 #include <string.h>
 #include <ctype.h>
 
-unsigned char ruleCA(struct ca_data* caData, int index){
-
-	unsigned char newValue;
-
-/*Rule for white*/
-	if (caData->arrayP[index - 1] == 1 && caData->arrayP[index + 1] == 1 && caData->arrayP[index] == 0){
-	newValue = 1;
- 	}
- 	if (caData->arrayP[index - 1] == 1 && caData->arrayP[index + 1] == 0 && caData->arrayP[index] == 0){
- 	newValue = 0;
- 	}
- 	if (caData->arrayP[index - 1] == 0 && caData->arrayP[index + 1] == 1 && caData->arrayP[index] == 0){
- 	newValue = 1;
- 	}
- 	if (caData->arrayP[index - 1] == 0 && caData->arrayP[index + 1] == 0 && caData->arrayP[index] == 0){
- 	newValue = 0; 
- 	}
- 	
-/*Rule for black*/ 	
-	if (caData->arrayP[index - 1] == 1 && caData->arrayP[index + 1] == 1 && caData->arrayP[index] == 1){
-	newValue = 0; 
- 	}
- 	if (caData->arrayP[index - 1] == 1 && caData->arrayP[index + 1] == 0 && caData->arrayP[index] == 1){
- 	newValue = 1;
- 	}
- 	if (caData->arrayP[index - 1] == 0 && caData->arrayP[index + 1] == 1 && caData->arrayP[index] == 1){
- 	newValue = 1;
- 	}
- 	if (caData->arrayP[index - 1] == 0 && caData->arrayP[index + 1] == 0 && caData->arrayP[index] == 1){
- 	newValue = 1;
- 	}	
-
-/*
-	if(caData->arrayP[index] != 0 && caData->arrayP[index] != 1){
-	printf("Can't calculate rule if not 0 or 1!");
-	}*/
-	return newValue;
-	
-}
-
 int main (int argc, char* argv[]){
 
-int cells = atoi(argv[1]);
-int states = atoi(argv[2]);
-char* flag = (argv[3]);
-int initialState = atoi(argv[4]);
-int steps = atoi(argv[5]);
-int tempFlag; 
-
+int OneOrTwo = atoi (argv[1]);
+char* path = argv[2];
+int rows;
+int cols;
+unsigned char temp;
 struct ca_data* test;
+char ch;
 
-/*Error Checking-Cells*/
-if (cells > 100 || cells < 10){
-	printf("Please enter a number (10-100) for cells and re-run the program! \n\n");
-	return 0;
-	}
-/*Error Checking-States*/	
-if(states <= 0){
-	printf("Please enter a valid number of states (a NUMBER greater or equal to 1), when re-running the program!\n");
-	return 0;
-	}
-/*Error Checking-Wrapping*/	
-if (strcmp(flag, "wrap") == 0){
-	tempFlag = 1;
-}
 
-if (strcmp(flag, "nowrap") == 0){
-	tempFlag = 0;
-	//test->wrapState = 0; I get seg-faulted if I do this can you explain why? That's why I used a tempFlag to assign it later.
-}
-if(strcmp(flag, "nowrap") != 0 && strcmp(flag, "wrap") != 0){
-	printf("Please enter wrap or nowrap!\n");
-	return 0;
-	}
+unsigned char ruleCA(struct ca_data* caData, int x, int y){
+
+int count = 0; 
+int value;
+int bottom, top, left, right;
+int temp = 0;
+
+
+top = (caData->height + y - 1) % caData->height;
+bottom = (caData->height + y + 1) % caData->height;
+left = (caData->width + x - 1) % caData->width;
+right = (caData->width + x + 1) % caData->width;
+
+
+	count = caData->cadata[top][left] + caData->cadata[top][x] + caData->cadata[top][right] +
+		caData->cadata[y][left] +  caData->cadata[y][right] +
+		caData->cadata[bottom][left] + caData->cadata[bottom][x] + caData->cadata[bottom][right];
 
 	
-/*Error Checking-Initial State*/ //Change later
-if(initialState >= states){
-	printf("Please enter a valid initial state: (0 to %d) or input: -1 for random, when re-running the program!\n", states - 1);
-	return 0;
-}
-/*Error Checking-Steps*/
-if(steps <= 0){
-	printf("Please enter a valid number of steps (a NUMBER greater or equal to 1), when re-running the program!\n");
-	return 0;
+	
+	if (caData->cadata[x][y] == 0 && count == 3){
+	value = 1;
+	}
+	if (caData->cadata[x][y] == 1 && (count == 2 || count == 3)){
+	value = 1;
+	}
+	else{
+	value = 0;
 	}
 	
-printf("Cells: %d\n", cells);
-printf("Number of states: %d\n", states);
-printf("Wrap or No wrap: %s\n", flag);
-if (initialState == -1){
-	printf("Initial State: random\n");
-	}
-else {
-	printf("Initial State: %d\n", initialState);
+	return value;
+	
 }
-printf("Steps: %d\n\n", steps);
+/*
+struct ca_data* testt;
+testt = create2DCA(5,5,2);
+step2DCA(testt, ruleCA);
+displayCA(testt);
+*/
 
-/*Create 1DCA and change according to prompts*/
+FILE *ptr = fopen(path, "r");
 
-test = create1DCA(cells, 0);
-test->stateAmount = states;
-test->wrapState = tempFlag;
-test->initialState = initialState;
-init1DCA(test, initialState); 
-display1DCA(test);
+/*Error Checking*/
+if (ptr == NULL){
 
-for (int i = 0; i < steps; i++){ 
-	stepCA(test, ruleCA, test->wrapState);
-	display1DCA(test); 
+	printf("Error!\n");
+	exit(1);
+}
+if (OneOrTwo == 2){
+
+/*Read file contents*/
+
+fscanf(ptr, "%d %d" , &rows, &cols);
+
+
+printf("Rows: %d\n", rows);
+printf("Cols: %d\n\n", cols);
+printf("\n");
+
+/*Transfer contents into CA*/
+
+test->height = 7;
+test->width = 10;
+
+test = create2DCA(test->width, test->height, 0);
+test->wrap = 1;
+
+for (unsigned int i = 0; i < test->height; i++){
+	for (unsigned int j = 0; j < test->width; j++){
+		fscanf(ptr, "%u", &temp);
+		set2DCACell(test,j, i, temp);
 	}
 
+}
+displayCA(test);
+
+/*While user input is not a char, step through CA every time enter is pressed*/
+
+do {
+
+	scanf("%c", &ch);
+	
+	if (isalpha(ch)){
+		break;
+}
+	//step2DCA(test, ruleCA);
+	displayCA(test);
+}
+while (ch != 'c');	
+
+
+/*
+/*Close file after reading*/
+fclose(ptr);
 return 0;
 }
+}
+
+
+

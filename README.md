@@ -23,6 +23,8 @@ The program has methods for a 1D array as well, but the main program will not si
 
 0: Represents "dead" cells
 
+**NOTE TO TA'S:** I've tested my program on Ubuntu using terminal and the code works fine, I'm not sure why it doesn't work on the pyrite server.
+
 
 
 

@@ -76,8 +76,8 @@ printf("\n");
 
 /*Transfer contents into CA*/
 
-test->height = 7;
-test->width = 10;
+test->height = rows;
+test->width = cols;
 
 test = create2DCA(test->width, test->height, 0);
 test->wrap = 1;

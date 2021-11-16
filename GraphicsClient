@@ -1,0 +1,33 @@
+#include <iostream>
+using namespace std;
+
+class GraphicsClient {
+
+public:
+	GraphicsClient(std::string, int);
+	GraphicsClient(const GraphicsClient& origObj);
+	~GraphicsClient();
+	GraphicsClient& operator=(const GraphicsClient& objCopy);
+	void setBackgroundColor(int, int, int);
+	void setDrawingColor(int, int, int);
+	void clear();
+	void setPixel (int, int, int, int, int);
+	void drawRectangle(int, int, int, int);
+	void fillRectangle(int, int, int, int);
+	void clearRectangle(int, int, int, int);
+	void drawOval(int, int, int, int);
+	void fillOval(int, int, int, int);
+	void drawLine(int, int, int, int);
+	void drawString(int, int, string);
+	void repaint;
+	void redraw(repaint);
+	
+private:
+
+};
+
+/*Constructor*/
+GraphicsClient::GraphicsClient (std::string URL, int portNum){
+	
+}
+

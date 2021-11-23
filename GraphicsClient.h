@@ -1,9 +1,21 @@
-#include <iostream>
+#ifndef GC_H
+#define GC_H
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/socket.h>
+#include <arpa/inet.h>
+#include <unistd.h>
+#include <string.h>
+
+
 using namespace std;
 
 class GraphicsClient {
 
 public:
+	GraphicsClient();
 	GraphicsClient(std::string, int);
 	GraphicsClient(const GraphicsClient& origObj);
 	~GraphicsClient();
@@ -19,15 +31,18 @@ public:
 	void fillOval(int, int, int, int);
 	void drawLine(int, int, int, int);
 	void drawString(int, int, string);
-	void repaint;
-	void redraw(repaint);
+	void repaint();
+	
 	
 private:
+	int port;
+	std::string URLname;
+	int sockfd = socket(AF_INET, SOCK_STREAM, 0);
+	//GraphicsClient GC;
+	
+	
+	
 
 };
 
-/*Constructor*/
-GraphicsClient::GraphicsClient (std::string URL, int portNum){
-	
-}
-
+#endif

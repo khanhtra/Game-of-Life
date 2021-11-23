@@ -20,7 +20,7 @@ int main(void)
     serv_addr.sin_family = AF_INET;
     serv_addr.sin_port = htons(7777);
 
-    if(inet_pton(AF_INET, "10.0.2.15", &serv_addr.sin_addr)<=0)
+    if(inet_pton(AF_INET, "192.168.1.1", &serv_addr.sin_addr)<=0)
     {
         fprintf(stderr, "Invalid address/ Address not supported \n");
         return -1;

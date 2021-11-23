@@ -57,25 +57,27 @@ char ch;
 
 GraphicsClient* a = new GraphicsClient ("10.0.2.15", 7777);
 CellularAutomaton* b = new CellularAutomaton(path, 1);
+//GraphicsClient* c = a;
 //a->setBackgroundColor (126,82,238);
 //a->clear();
 b->display(*a);
 
-do {
+	do {
 
-	scanf("%c", &ch);
-	if (isalpha(ch)){
-		break;
-}
-	//a->setBackgroundColor(126,82,238);
-	a->clear();
-	b->step(b, &ruleCA);
-	b->display(*a);
-}
-while (ch != 'c');
+		scanf("%c", &ch);
+		if (isalpha(ch)){
+			break;
+	}
+		//a->setBackgroundColor(126,82,238);
+		a->clear();
+		b->step(b, &ruleCA);
+		b->display(*a);
+		
+	}
+	while (ch != 'c');
 
 
-}
+	}
 
 
 

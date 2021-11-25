@@ -67,8 +67,8 @@ GraphicsClient::GraphicsClient (const GraphicsClient& origObj){
 
 /*Destructor*/
 GraphicsClient::~GraphicsClient(){
+//cout << "Called";
 close(this->sockfd);
-delete this;
 }
 
 /*Background Color*/

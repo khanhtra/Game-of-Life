@@ -17,22 +17,22 @@ int value;
 int bottom, top, left, right;
 int temp = 0;
 
-top = (caData->height + y - 1) % caData->height;
-bottom = (caData->height + y + 1) % caData->height;
-left = (caData->width + x - 1) % caData->width;
-right = (caData->width + x + 1) % caData->width;
+top = (caData->getHeight() + y - 1) % caData->getHeight();
+bottom = (caData->getHeight() + y + 1) % caData->getHeight();
+left = (caData->getWidth() + x - 1) % caData->getWidth();
+right = (caData->getWidth() + x + 1) % caData->getWidth();
 
 
-	count = caData->cadata[top][left] + caData->cadata[top][x] + caData->cadata[top][right] +
-		caData->cadata[y][left] +  caData->cadata[y][right] +
-		caData->cadata[bottom][left] + caData->cadata[bottom][x] + caData->cadata[bottom][right];
+	count = caData->getcadata(top,left) + caData->getcadata(top,x) + caData->getcadata(top,right) +
+		caData->getcadata(y,left) +  caData->getcadata(y,right) +
+		caData->getcadata(bottom,left) + caData->getcadata(bottom,x) + caData->getcadata(bottom,right);
 
 	
 	
-	if (caData->cadata[y][x] == 0 && count == 3){
+	if (caData->getcadata(y,x) == 0 && count == 3){
 	value = 1;
 	}
-	else if (caData->cadata[y][x] == 1 && (count == 2 || count == 3)){
+	else if (caData->getcadata(y,x) == 1 && (count == 2 || count == 3)){
 	value = 1;
 	}
 	else{
@@ -51,22 +51,30 @@ right = (caData->width + x + 1) % caData->width;
 
 int main (int argc, char* argv[]){
 char* path = argv[1];
-//int port = atoi(argv[2]);
 char ch;
-
 
 GraphicsClient* a = new GraphicsClient ("10.0.2.15", 7777);
 CellularAutomaton* b = new CellularAutomaton(path, 1);
+//printf("%u", b->getcadata(0,0));
+//CellularAutomaton c (path, 1);
+//CellularAutomaton b;
+//b = c; Assignment Operator
+//CellularAutomaton b = c; Copy Constructor
 //GraphicsClient* c = a;
 //a->setBackgroundColor (126,82,238);
 //a->clear();
+
+/*Test for "new" create object*/
+
 b->display(*a);
 
 	do {
 
 		scanf("%c", &ch);
 		if (isalpha(ch)){
-			break;
+		delete a;
+		delete b;
+		break;
 	}
 		//a->setBackgroundColor(126,82,238);
 		a->clear();
@@ -75,9 +83,27 @@ b->display(*a);
 		
 	}
 	while (ch != 'c');
-
-
 	}
+	
+	/* Test for copy constructor and assignment operator 
+b.display(*a);
 
+	do {
+
+		scanf("%c", &ch);
+		if (isalpha(ch)){
+		//delete a;
+		//delete b;
+		break;
+	}
+		//a->setBackgroundColor(126,82,238);
+		a->clear();
+		b.step(&b, &ruleCA);
+		b.display(*a);
+		
+	}
+	while (ch != 'c');
+	}
+	*/
 
 

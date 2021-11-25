@@ -25,15 +25,17 @@ public:
 	CellularAutomaton& operator= (const CellularAutomaton& objCopy);
 	void step(CellularAutomaton*, unsigned char(*) (CellularAutomaton*, int, int));
 	void display(GraphicsClient& GC);
-	int width;
-	int height;
-	unsigned char ** cadata;
+	int getWidth(){return width;}
+	int getHeight(){return height;}
+	unsigned char getcadata(int,int);
+	//unsigned char ** cadata;
 	
 	
 private:
-	//int width;
-	//int height;
-	//unsigned char ** cadata;
+
+	int width;
+	int height;
+	unsigned char ** cadata;
 	int Qstate;
  
 	

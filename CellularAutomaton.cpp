@@ -16,10 +16,10 @@ using namespace std;
 
 /*Default values for a CA object*/
 CellularAutomaton::CellularAutomaton(){
-//width = 0;
-//height = 0;
+width = 0;
+height = 0;
 Qstate = 0;
-
+cadata = NULL;
 }
 
 /*Creates an CA object specified by a file*/
@@ -79,19 +79,30 @@ CellularAutomaton::CellularAutomaton(std::string fileName, int qState){
 
 }
 
+/*Copy Constructor*/
 CellularAutomaton::CellularAutomaton(const CellularAutomaton& copyObj){
 
-
+width = copyObj.width;
+height = copyObj.height;
+Qstate = copyObj.Qstate;
+cadata = copyObj.cadata;
 }
 
 CellularAutomaton::~CellularAutomaton(){
-delete this;
+//cout << "called" << endl;
+for (int i = 0; i < height; i++){
+		delete [] this->cadata[i];
+	}
+//printf("%u", cadata[0][0]);
 }
 
+
 CellularAutomaton& CellularAutomaton::operator=(const CellularAutomaton& copyObj){
-	if (this != &copyObj){
-		
-	}
+
+width = copyObj.width;
+height = copyObj.height;
+Qstate = copyObj.Qstate;
+cadata = copyObj.cadata;
 
 return *this;
 }
@@ -169,6 +180,10 @@ else if (maxSize > 1 && maxSize <= 50){
 	}
 	graphicsClient.repaint();
 	
+}
+
+unsigned char CellularAutomaton::getcadata(int y,int x){
+return this->cadata[y][x];
 }
 
 

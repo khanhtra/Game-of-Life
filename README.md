@@ -5,9 +5,22 @@ COMS 327_
 
 **Cellular Automata Project**
 
-Currently the program models a cellular automata where the user can specify: size, rule used, initial states, and the amount of "steps" the CA (cellular automata) goes through. 
-The program displays a simulation of each cell in the CA processing a specified rule.
-The cells are displayed on a graphics server (**GraphicsServer.jar**) that is provided and a graphics client (**GraphicsClient.cpp**) is used to connect and send specific commands to. 
+Currently the program creates a GUI of a model of an cellular automata where the user can click on "buttons" that perform the following: 
+
+1. Iterate once (STEP)
+2. Iterate indefinitely (RUN)
+3. Pause the simulation (PAUSE)
+4. Reset to loaded file model (RESET)
+5. Randomize each cell (0 or 1) of current model (RANDOM)
+6. Load desired text file (LOAD)
+7. Clear the screen (CLEAR)
+8. Select one of three model sizes (SELECT SIZE -- click on 1,2, or 3)
+9. End the simulation (QUIT)
+
+
+The program will update according to the corresponding button clicks.
+
+The cells are displayed on a graphics server (**GraphicsServerV2.jar**) along with a created GUI.
 
 **How to run on a Linux machine**
 
@@ -15,23 +28,20 @@ The cells are displayed on a graphics server (**GraphicsServer.jar**) that is pr
 1. Open two terminal windows and use command "cd" to locate files
 
 
-2. Use command "java -jar GraphicsServer.jar 7777" in one window, the user should see "Listening on port 7777" on the console
+2. Use command "java -jar GraphicsServerv2.jar" in one window, the user should see "Listening on port 7777" on the console
 
-3. User command "make" in the other terminal window
+3. Use command "make" in the other terminal window
 
 4. An executable file "**gol.exe**" should be present in the location you've used "cd" on
 
-5. To run the "**gol.exe**" use command "./gol "file name", where file name is the name of the text file you wish to run the program with
+5. To run the "**CASimulator.exe**" use command "./CASimulator" in the console
 
-    _Note: Text files should be of format: rows, cols, array[rows][cols] in that order, see "blinker.txt" in the repo for an example._
+6. A display should pop up in a separate window
 
-6. A display should pop up in a separate window and display a representation of a grid specified in the text file in step 5.
+7. Click on given buttons to simulate your desired action
 
-7. Pressing enter on the same window as step 5 will simulate one step of [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life), keep pressing enter to simulate more steps.
+8. Re-run program by using step 5.
 
-8. To disconnect the program and display, press any character followed by enter.
-
-9. Go through steps 2-5 to rerun the program.
 
 
 

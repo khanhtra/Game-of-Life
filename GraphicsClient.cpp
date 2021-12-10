@@ -6,6 +6,7 @@
 #include <arpa/inet.h>
 #include <unistd.h>
 #include <string.h>
+#include <sys/ioctl.h>
 
 
 using namespace std;
@@ -484,25 +485,76 @@ void GraphicsClient::repaint(){
  
 }
 
-/*
-int main (){
-cout << "Hello WOrld!" << endl;
-GraphicsClient *test = new GraphicsClient ("10.0.2.15", 7777);
-test->setBackgroundColor(255,123,71);
-test->clear();
-test->repaint();
-test->setDrawingColor(100,20,45);
-//test->drawRectangle(20,20,200,150);
-//test->fillRectangle(20,20,200,150);
-test->clearRectangle(60,60,200,150);
-test->drawOval(200,200,200,150);
-test->fillOval(200,200,200,150);
-test->drawLine(20,20, 400, 100);
-test->drawString(120,120, "this is for NARNIA!");
-test->setPixel(200,200, 1, 255, 5);
-test->repaint();
 
+void GraphicsClient::mousePress(){
 
+   int count;
+   ioctl(this->sockfd, FIONREAD, &count);
+
+   char message[300];
+   read(this->sockfd, message, count);
+   
+   this->countM = count;
+
+   
+   int xC = (message[8] & 0x0F) * 256 + (message[9] & 0x0F) * 16 + (message[10] & 0x0F);
+   int yC = (message[12] & 0x0F) * 256 + (message[13] & 0x0F) * 16 + (message[14] & 0x0F);
+   int mouseT = message[5];
+   int mouseButton = message[6];
+   this->x = xC;
+   this->y = yC;
+   this->mouseType = mouseT;
+   
+   //cout << x << endl;
+   /*Get X and Y coordianates*/
+  // char xC = ((message[8]) & 0x0F) * 256 + ((message[9]) & 0x0F) * 16 + ((message[10]) & 0x0F);
+  // char yC;
+   //cout << " ss"; 
+ 
+   
+  
+   
+  //message[8] = (message[8] + 0x00 << 12) & 0x0F;
+  //printf("%d", message[8]);
+  
 }
-*/
+
+void GraphicsClient::fileMessage(){
+   char message1[100];
+ 
+   //Sends a "file browser" message to server
+   message1[0] = 0xFF;
+   message1[1] = 0x00;
+   message1[2] = 0x00;
+   message1[3] = 0x00;
+   message1[4] = 0x01;
+   message1[5] = 0x0E;
+   
+   send(this->sockfd, message1, 6, 0);
+   
+   int count;
+   ioctl(this->sockfd, FIONREAD, &count);
+
+ 
+   char message[300];
+   read(this->sockfd, message, count);
+   
+   char file[300] = "blinker.txt";
+   for (int i = 0; i < 300; i++){
+   file[i] = message[i + 5] << 4 | message [i + 6];
+   this->fileName = file;
+}
+}
+
+bool GraphicsClient::inRectangle(int x1, int y1, int x2, int y2){
+if (this->x > x1 && this->x < x2 && this->y > y1 && this->y < y2){
+return true;
+}
+return false;
+}
+
+
+
+
+
 

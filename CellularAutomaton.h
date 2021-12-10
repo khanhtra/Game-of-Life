@@ -26,9 +26,17 @@ public:
 	void step(CellularAutomaton*, unsigned char(*) (CellularAutomaton*, int, int));
 	void display(GraphicsClient& GC);
 	int getWidth(){return width;}
+	void setWidth(int w){width = w;}
 	int getHeight(){return height;}
+	void setHeight(int h){height = h;}
 	unsigned char getcadata(int,int);
-	//unsigned char ** cadata;
+	void randomize();
+	int getCellGap(){return cellG;}
+	int getCellSize(){return cellS;}
+	void setCell(int x, int y, int value){cadata[y][x] = value;};
+	void setCellGap(int cg){cellG = cg;}
+	void setCellSize(int cs){cellS = cs;}
+	void setZero();
 	
 	
 private:
@@ -37,6 +45,8 @@ private:
 	int height;
 	unsigned char ** cadata;
 	int Qstate;
+	int cellG;
+	int cellS;
  
 	
 	

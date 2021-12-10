@@ -32,6 +32,15 @@ public:
 	void drawLine(int, int, int, int);
 	void drawString(int, int, string);
 	void repaint();
+	void mousePress();
+	void fileMessage();
+	int getX(){return x;};
+	int getY(){return y;};
+	bool inRectangle(int, int, int, int);
+	char* getFileName(){return fileName;};
+	void setX(int xC){ x = xC;}; //used for inRectangle() method
+	void setY(int yC){ y =yC;}; //used for inRectangle() method
+	int getsockfd(){return sockfd;};
 	
 	
 private:
@@ -39,6 +48,8 @@ private:
 	std::string URLname;
 	int sockfd = socket(AF_INET, SOCK_STREAM, 0);
 	//GraphicsClient GC;
+	int x,y, mouseType, countM;
+	char* fileName;
 	
 	
 	

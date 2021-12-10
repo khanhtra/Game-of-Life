@@ -55,6 +55,7 @@ char ch;
 
 GraphicsClient* a = new GraphicsClient ("10.0.2.15", 7777);
 CellularAutomaton* b = new CellularAutomaton(path, 1);
+
 //printf("%u", b->getcadata(0,0));
 //CellularAutomaton c (path, 1);
 //CellularAutomaton b;
@@ -70,14 +71,14 @@ b->display(*a);
 
 	do {
 
-		scanf("%c", &ch);
+		//scanf("%c", &ch);
 		if (isalpha(ch)){
 		delete a;
 		delete b;
 		break;
 	}
 		//a->setBackgroundColor(126,82,238);
-		a->clear();
+		a->clearRectangle(10,10,600,600);
 		b->step(b, &ruleCA);
 		b->display(*a);
 		

@@ -159,6 +159,10 @@ else if (maxSize > 1 && maxSize <= 50){
 	cellGap = 2;
 }
 
+this->cellG = cellGap;
+this->cellS = cellSize;
+
+
 
 	/*Draw Rectangles for each CA state, solid = alive, non-solid = dead*/
 	for (int i = 0; i < width; i++){
@@ -167,23 +171,44 @@ else if (maxSize > 1 && maxSize <= 50){
 		//int b = j * 20;
 		//printf("%d", this->cadata[j][i]);
 			if (this->cadata[j][i] == 1){
-			graphicsClient.fillRectangle(i * (cellSize + cellGap), j * (cellSize + cellGap), cellSize, cellSize);
-			//graphicsClient.drawString(i * 40 + (i * 5) + 10,j * 40 + (j * 5) + 10, "alive");
-			//graphicsClient.repaint();
+			graphicsClient.drawRectangle(i * (this->cellS + this->cellG), j * (this->cellS + this->cellG), this->cellS, this->cellS);
 			}
 			else if (this->cadata[j][i] == 0){
-			graphicsClient.drawRectangle(i * (cellSize + cellGap), j * (cellSize + cellGap), cellSize, cellSize);
+			//graphicsClient.fillRectangle(i * (cellSize + cellGap), j * (cellSize + cellGap), cellSize, cellSize);
 			//graphicsClient.drawString(i * 40 + (i * 5) + 10,j * 40 + (j * 5) + 10, "dead");
 			//graphicsClient.repaint();
 			}
 			}
 	}
-	graphicsClient.repaint();
 	
+	//graphicsClient.clearRectangle(0,0, 600,600);
+	graphicsClient.repaint();
+	//graphicsClient.clearRectangle(0,0,599,599);
+	
+}
+
+void CellularAutomaton::randomize(){
+
+for (unsigned int i = 0; i < this->height; i++){
+		for (unsigned int j = 0; j < this->width; j++){
+			this->cadata[i][j] = rand() % 2;
+		}
+
+	}
+
 }
 
 unsigned char CellularAutomaton::getcadata(int y,int x){
 return this->cadata[y][x];
+}
+
+void CellularAutomaton::setZero(){
+for (unsigned int i = 0; i < this->height; i++){
+		for (unsigned int j = 0; j < this->width; j++){
+			this->cadata[i][j] = 0;
+		}
+
+	}
 }
 
 

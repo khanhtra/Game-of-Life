@@ -14,6 +14,7 @@ _Graphics Client (GraphicsClient.cpp and GraphicsClient.h)_
     5. Set a pixel at a location
     6. Draw a line
     7. Write a string 
+    8. Create a "file browser" for the user to select specific text files.
     
     The code is written in a way that interacts with the graphics server through formats given by the instructor, 
     a series of "messages" are used and sent to the graphics server using c sockets. Each feature is accessed by using 
@@ -32,10 +33,13 @@ _Cellular Automaton Model (CellularAutomaton.cpp and CellularAutomaton.h)_
     "alive" states are modeled by a solid square, and "dead" states are modeled by a hollow square. Cell size and cell gap are hard 
     coded. 
 
-    
+_CA Simulator (GraphicsClient.cpp,GraphicsClient.h, and casimulator.cpp)_
+    Creates a pre-determined GUI layout that I have designed. The GUI displays buttons that respond to clicks given by the Graphics 
+    Server and perform actions based on what is "clicked". I have designed the GUI so that whenever a click is performed the button 
+    will flash a color to indicate it is being pressed, with the exception of "RUN", where the button will remain green until "PAUSE" 
+    is clicked.
 
         
-
 
 
 

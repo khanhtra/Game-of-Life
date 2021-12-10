@@ -486,39 +486,6 @@ void GraphicsClient::repaint(){
 }
 
 
-void GraphicsClient::mousePress(){
-
-   int count;
-   ioctl(this->sockfd, FIONREAD, &count);
-
-   char message[300];
-   read(this->sockfd, message, count);
-   
-   this->countM = count;
-
-   
-   int xC = (message[8] & 0x0F) * 256 + (message[9] & 0x0F) * 16 + (message[10] & 0x0F);
-   int yC = (message[12] & 0x0F) * 256 + (message[13] & 0x0F) * 16 + (message[14] & 0x0F);
-   int mouseT = message[5];
-   int mouseButton = message[6];
-   this->x = xC;
-   this->y = yC;
-   this->mouseType = mouseT;
-   
-   //cout << x << endl;
-   /*Get X and Y coordianates*/
-  // char xC = ((message[8]) & 0x0F) * 256 + ((message[9]) & 0x0F) * 16 + ((message[10]) & 0x0F);
-  // char yC;
-   //cout << " ss"; 
- 
-   
-  
-   
-  //message[8] = (message[8] + 0x00 << 12) & 0x0F;
-  //printf("%d", message[8]);
-  
-}
-
 void GraphicsClient::fileMessage(){
    char message1[100];
  
@@ -532,18 +499,6 @@ void GraphicsClient::fileMessage(){
    
    send(this->sockfd, message1, 6, 0);
    
-   int count;
-   ioctl(this->sockfd, FIONREAD, &count);
-
- 
-   char message[300];
-   read(this->sockfd, message, count);
-   
-   char file[300] = "blinker.txt";
-   for (int i = 0; i < 300; i++){
-   file[i] = message[i + 5] << 4 | message [i + 6];
-   this->fileName = file;
-}
 }
 
 bool GraphicsClient::inRectangle(int x1, int y1, int x2, int y2){

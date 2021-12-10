@@ -58,13 +58,20 @@ tim.tv_nsec = 100000000; //.1 second
 
 /*Create UI Layout*/
 GraphicsClient* a = new GraphicsClient ("10.0.2.15", 7777);
-CellularAutomaton* ca = new CellularAutomaton ("glider.txt", 1);
+CellularAutomaton* ca = new CellularAutomaton ("default", 1);
+CellularAutomaton* caLoad;
 
 int i = 0;
 int runFlag = 0;
 int sizeFlag = 0;
 int count;
 char message[300];
+char fileName[500];
+char fileNames[200];
+int filePayload;
+int first = 6;
+int second = 7;
+char x;
 	
 	a->setDrawingColor(77, 72, 108);
 	/*Border for UI*/
@@ -179,7 +186,12 @@ int mouseType = message[5];
 	cout << "X:" << xC << endl;
 	cout << "Y:" << yC << endl;
 	cout << sizeFlag << endl;
-		if (a->inRectangle(610,60,790,100) == true && mouseType == 1){
+	cout << fileName << endl;
+	
+	cout << "width: " << ca->getWidth() << endl;
+	cout << "height: " << ca->getHeight() << endl;
+	
+ 		if (a->inRectangle(610,60,790,100) == true && mouseType == 1){
 				/*Indicates Button is pressed by color*/			
 					a->setDrawingColor(28,243,127);
 					a->fillRectangle(610, 60, 180, 40);
@@ -220,7 +232,7 @@ int mouseType = message[5];
 					a->setDrawingColor(44,166,144);
 					a->drawString(620, 232, "RESET");
 					a->repaint();
-					//ca = new CellularAutomaton ("glider.txt", 1);
+					ca = new CellularAutomaton (fileName, 1);
 					//Stops random cells from populating every cell
 					a->clearRectangle(0,0, 600,600);
 					ca->display(*a);
@@ -237,6 +249,7 @@ int mouseType = message[5];
 					a->repaint();
 							
 					//Randomize current CA
+					//CellularAutomaton* caR = new CellularAutomaton();
 					ca->randomize();
 					//Stops random cells from populating every cell
 					a->clearRectangle(0,0, 600,600);
@@ -245,15 +258,34 @@ int mouseType = message[5];
 				}
 			//Load
 		if (a->inRectangle(610,310,790,350) == true && mouseType == 1){ 
-		
-					a->fileMessage();
-					char test[20] = "test";
-					CellularAutomaton* caLoad = new CellularAutomaton(test, 1); //change to test for it to work
-					ca = caLoad;
-					a->clearRectangle(0,0, 600,600);
-					ca->display(*a);		
+			delete ca;
+					a->setDrawingColor(28,243,127);
+					a->fillRectangle(610, 310, 180, 40);
+					a->setDrawingColor(44,166,144);
+					a->drawString(620, 332, "LOAD");
+					a->repaint();
+					a->fileMessage();	
+					/*Wait for file selection, if successful*/
+					while (ioctl(a->getsockfd(), FIONREAD, &count) == 0){
+						read(a->getsockfd(), message, count);
+						filePayload = (message[1] << 12)  | (message[2] << 8) | (message[3] << 4) | (message[4]);
+						if (message[5] == 0x0A){
+						break;
+						}
+					}
+						for (int i = 0; i < filePayload ; i++){
+						fileName[i] = message[first++] << 4 | message[second++];
+						first++;
+						second++;
 					
-				}
+					}
+					//CellularAutomaton* caLoad = new CellularAutomaton(fileName, 1); //change to test for it to work
+					ca = new CellularAutomaton(fileName, 1);
+					a->clearRectangle(0,0, 600,600);
+					ca->display(*a);	
+					
+					}	
+					
 			//Clear 
 		if (a->inRectangle(610,360,790,400) == true && mouseType == 1){
 		
@@ -336,27 +368,47 @@ int mouseType = message[5];
 			}
 			//Select Size 
 		if (a->inRectangle(620,522,670,577) == true && mouseType == 1){ //1
+	
 			/*Creates blank CA's with pre-determined sizes supplied by a text file*/
-			CellularAutomaton* ca40 = new CellularAutomaton("40by40", 1);
-			ca = ca40;
+			delete ca;
+			ca = new CellularAutomaton("40by40", 1);
 			a->clearRectangle(0,0,600,600);
 			/*Keeps track of selected size for toggle*/
 			sizeFlag = 1;
 				}
 		if (a->inRectangle(675,522,725, 577) == true && mouseType == 1){ //2
-			CellularAutomaton* ca150 = new CellularAutomaton("150by150", 1);
-			ca = ca150;
+			delete ca;
+			ca = new CellularAutomaton("150by150", 1);
 			a->clearRectangle(0,0,600,600);
 			sizeFlag = 2;
 				}
 		if (a->inRectangle(735,522,785,577) == true && mouseType == 1){ //3
-			CellularAutomaton* ca600 = new CellularAutomaton("600by600", 1);
-			ca = ca600;
+			delete ca;
+			ca = new CellularAutomaton("600by600", 1);
 			a->clearRectangle(0,0,600,600);
 			sizeFlag = 3;
 				}
 				
 			//Toggle cells logic
+			
+				/*Default Size Toggle*/
+		if (a->inRectangle(0,0,480,480) == true && mouseType == 1 && sizeFlag == 0){
+			/*Get (x,y) of CA relative to the "click" position on server*/
+			int pX = xC / (ca->getCellSize() + ca->getCellGap());
+			int pY = yC / (ca->getCellSize() + ca->getCellGap());
+			
+			/*Toggle cells from 0 to 1 or 1 to 0 then update to server*/
+			if (ca->getcadata(pY,pX) == 0){
+			ca->setCell(pX,pY, 1);
+			ca->display(*a);
+			}
+			else if (ca->getcadata(pY,pX) == 1){
+			ca->setCell(pX,pY, 0);
+			a->clearRectangle(0,0,600,600);
+			ca->display(*a);
+			}
+			}
+				/*Size 1 Toggle*/
 		if (a->inRectangle(0,0,480,480) == true && mouseType == 1 && sizeFlag == 1){
 			/*Get (x,y) of CA relative to the "click" position on server*/
 			int pX = xC / (ca->getCellSize() + ca->getCellGap());
@@ -373,8 +425,10 @@ int mouseType = message[5];
 			ca->display(*a);
 			}
 			}
-			/*Get (x,y) of CA relative to the "click" position on server*/
+			
+				/*Size 2 Toggle*/			
 		if (a->inRectangle(0,0,450,450) == true && mouseType == 1 && sizeFlag == 2){
+			/*Get (x,y) of CA relative to the "click" position on server*/
 			int pX = xC / (ca->getCellSize() + ca->getCellGap());
 			int pY = yC / (ca->getCellSize() + ca->getCellGap());
 			
@@ -390,7 +444,7 @@ int mouseType = message[5];
 			}
 			
 			
-		}
+		}		/*Size 3 Toggle*/
 		if (a->inRectangle(0,0,600,600) == true && mouseType == 1 && sizeFlag == 3){
 			/*Get (x,y) of CA relative to the "click" position on server*/
 			int pX = xC / (ca->getCellSize() + ca->getCellGap());
@@ -410,7 +464,6 @@ int mouseType = message[5];
 			
 		}
 			}
-	
 	
 }
 }

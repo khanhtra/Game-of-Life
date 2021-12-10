@@ -19,8 +19,9 @@ CellularAutomaton::CellularAutomaton(){
 width = 0;
 height = 0;
 Qstate = 0;
-cadata = NULL;
+cadata = 0;
 }
+
 
 /*Creates an CA object specified by a file*/
 CellularAutomaton::CellularAutomaton(std::string fileName, int qState){

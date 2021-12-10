@@ -37,6 +37,7 @@ public:
 	void setCellGap(int cg){cellG = cg;}
 	void setCellSize(int cs){cellS = cs;}
 	void setZero();
+
 	
 	
 private:

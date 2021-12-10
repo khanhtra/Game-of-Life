@@ -38,8 +38,8 @@ public:
 	int getY(){return y;};
 	bool inRectangle(int, int, int, int);
 	char* getFileName(){return fileName;};
-	void setX(int xC){ x = xC;}; //used for inRectangle() method
-	void setY(int yC){ y =yC;}; //used for inRectangle() method
+	void setX(int xC){ x = xC;}; 
+	void setY(int yC){ y =yC;};
 	int getsockfd(){return sockfd;};
 	
 	

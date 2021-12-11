@@ -57,8 +57,4 @@ Neighbors are the numbers around a cell at location (x,y) in the array presented
 
 Wrapping logic is included in the code.
 
-**How to simulate a pattern from the Game of Life** : 
-
-Set specific locations according to the desired pattern, the program will output a 2D array displaying the current state after x amount of times.
-
 

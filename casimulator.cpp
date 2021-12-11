@@ -186,6 +186,7 @@ int mouseType = message[5];
 	int pX = xC / (ca->getCellSize() + ca->getCellGap());
 	int pY = yC / (ca->getCellSize() + ca->getCellGap());
 	
+	/*
 	cout << "X:" << xC << endl;
 	cout << "Y:" << yC << endl;
 	cout << sizeFlag << endl;
@@ -194,6 +195,7 @@ int mouseType = message[5];
 	cout << "width: " << ca->getWidth() << endl;
 	cout << "height: " << ca->getHeight() << endl;
 	cout << fileName[5] << endl;
+	*/
 	
 	
  		if (a->inRectangle(610,60,790,100) == true && mouseType == 1){

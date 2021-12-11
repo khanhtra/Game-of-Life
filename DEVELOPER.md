@@ -33,13 +33,13 @@ _Cellular Automaton Simulation (casimulator.cpp)_
 
     Creates a GUI that is designed by me given by the tools of the graphics client. The buttons are created so that whenever the 
     correct position is clicked (location is given by the graphics server) the correct action will be performed on the left side of the
-    GUI. Whenever pressed with the exception of "RUN", the buttons will flash a color to indicate is has been clicked on. The "RUN" 
-    button will remain green if pressed and the simulation is currently running. Pressing "PAUSE" will stop the ongoing simulation and 
-    "RUN" will go back to it's original color. "LOAD" will open a file browser and the selected text file's properties will be shown 
-    on the GUI. "RESET" will reset the simulation back to it's original state from when "LOAD" was performed if a file WAS loaded, if 
-    not, it will revert back to it's original "default" file. "CLEAR" will make the left side of the GUI blank, setting each cell to state 0. 
-    The "RANDOM" button randomly assigned each cell state to be either dead or alive. The code includes a "toggle" logic which lets the user 
-    change the state of any desired cell from dead to alive or alive to dead. The simulation will run based on these updated toggled values.
+    GUI. Whenever pressed with the exception of "RUN" and "LOAD", the buttons will flash a color to indicate is has been clicked on. The "RUN" 
+    button will remain green if pressed and the simulation is currently running, "LOAD" will remain green while selecting a file. Pressing 
+    "PAUSE" will stop the ongoing simulation and "RUN" will go back to it's original color. "LOAD" will open a file browser and the selected 
+    text file's properties will be shown on the GUI. "RESET" will reset the simulation back to it's original state from when "LOAD" was performed 
+    if a file WAS loaded, if  not, it will revert back to it's original "default" file. "CLEAR" will make the left side of the GUI blank, setting 
+    each cell to state 0. The "RANDOM" button randomly assigned each cell state to be either dead or alive. The code includes a "toggle" logic which 
+    lets the user change the state of any desired cell from dead to alive or alive to dead. The simulation will run based on these updated toggled values.
 
 
 
@@ -57,6 +57,7 @@ Wrapping logic is included in the code.
 **KNOWN BUGS**
 - Selecting size 1 to 2 or 3 will cause the program to crash. The opposite should work.
 - "RUN" button and "PAUSE" will sometimes remain on the "pressed" color state, slowing down the time between clicks will help prevent this.
+- Loading another file after an initial file will break the program.
 
 
 

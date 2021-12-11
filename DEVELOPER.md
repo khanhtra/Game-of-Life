@@ -32,20 +32,21 @@ _Cellular Automaton Model (CellularAutomaton.cpp and CellularAutomaton.h)_
     the graphics server provided. The "display" function works in tandem with GraphicsClient.cpp. For the present implementation, 
     "alive" states are modeled by a solid square, and "dead" states are modeled by a hollow square. Cell size and cell gap are hard 
     coded. 
+_Cellular Automaton Simulation (casimulator.cpp)_
 
-_CA Simulator (GraphicsClient.cpp,GraphicsClient.h, and casimulator.cpp)_
-    Creates a pre-determined GUI layout that I have designed. The GUI displays buttons that respond to clicks given by the Graphics 
-    Server and perform actions based on what is "clicked". I have designed the GUI so that whenever a click is performed the button 
-    will flash a color to indicate it is being pressed, with the exception of "RUN", where the button will remain green until "PAUSE" 
-    is clicked.
-
-        
+    Creates a GUI that is designed by me given by the tools of the graphics client. The buttons are created so that whenever the 
+    correct position is clicked (location is given by the graphics server) the correct action will be performed on the left side of the
+    GUI. Whenever pressed with the exception of "RUN", the buttons will flash a color to indicate is has been clicked on. The "RUN" 
+    button will remain green if pressed and the simulation is currently running. Pressing "PAUSE" will stop the ongoing simulation and 
+    "RUN" will go back to it's original color. "LOAD" will open a file browser and the selected text file's properties will be shown 
+    on the GUI. "RESET" will reset the simulation back to it's original state from when "LOAD" was performed. "CLEAR" will make the
+    left side of the GUI blank, setting each cell to state 0. The "RANDOM" button randomly assigned each cell state to be either dead 
+    or alive. The code includes a "toggle" logic which lets the user change the state of any desired cell from dead to alive or alive 
+    to dead. The simulation will run based on these updated toggled values.
 
 
 
 **CONWAY'S GAME OF LIFE IN C**
-
-
 
 The code follows these sets of rules for the Game of Life for each simulation: 
 - _Any live cell with 2 or 3 neighbors surive._

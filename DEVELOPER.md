@@ -1,7 +1,4 @@
-**CONWAY'S GAME OF LIFE IN C++**
-
-
-The program currently displays a screen with a cellular automaton model on it. Pressing enter in the console window will simulate one step of Conway's Game of Life. Alive states are represented by a solid square and dead states are represented by a hollow square, the display's default color is black but a user can change it to any RGB color that is desired. Pressing a character followed by enter will stop the connection to the display and terminate the program.
+**CONWAY'S GAME OF LIFE SIMULATOR IN C++**
 
 _Graphics Client (GraphicsClient.cpp and GraphicsClient.h)_
 

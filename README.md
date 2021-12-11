@@ -22,6 +22,8 @@ The program will update according to the corresponding button clicks. The user c
 
 The cells are displayed on a graphics server (**GraphicsServerV2.jar**) along with a created GUI.
 
+_**The CA initial state is left intentionally blank so the user can click on cells to make it become "alive". The initial space where the user can click is 240x240 pixels.**_
+
 **How to run on a Linux machine**
 
 

@@ -18,7 +18,7 @@ Currently the program creates a GUI of a model of an cellular automata where the
 9. End the simulation (QUIT)
 
 
-The program will update according to the corresponding button clicks.
+The program will update according to the corresponding button clicks. The user can toggle any cell by clicking on the square and it will either change from dead to alive (blank square to outlined square) or vice versa.
 
 The cells are displayed on a graphics server (**GraphicsServerV2.jar**) along with a created GUI.
 

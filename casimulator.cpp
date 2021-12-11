@@ -18,6 +18,7 @@ int value;
 int bottom, top, left, right;
 int temp = 0;
 
+
 top = (caData->getHeight() + y - 1) % caData->getHeight();
 bottom = (caData->getHeight() + y + 1) % caData->getHeight();
 left = (caData->getWidth() + x - 1) % caData->getWidth();
@@ -71,6 +72,7 @@ char fileNames[200];
 int filePayload;
 int first = 6;
 int second = 7;
+int loadFlag = 0;
 char x;
 	
 	a->setDrawingColor(77, 72, 108);
@@ -232,7 +234,12 @@ int mouseType = message[5];
 					a->setDrawingColor(44,166,144);
 					a->drawString(620, 232, "RESET");
 					a->repaint();
+					if (loadFlag == 1){
 					ca = new CellularAutomaton (fileName, 1);
+					}
+					else if (loadFlag == 0){
+					ca = new CellularAutomaton ("default", 1);
+					}
 					//Stops random cells from populating every cell
 					a->clearRectangle(0,0, 600,600);
 					ca->display(*a);
@@ -259,6 +266,7 @@ int mouseType = message[5];
 			//Load
 		if (a->inRectangle(610,310,790,350) == true && mouseType == 1){ 
 			delete ca;
+					loadFlag = 1;
 					a->setDrawingColor(28,243,127);
 					a->fillRectangle(610, 310, 180, 40);
 					a->setDrawingColor(44,166,144);

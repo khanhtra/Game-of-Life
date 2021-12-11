@@ -57,5 +57,10 @@ Neighbors are the numbers around a cell at location (x,y) in the array presented
 
 Wrapping logic is included in the code.
 
+**KNOWN BUGS**
+- Selecting size 1 to 2 or 3 will cause the program to crash. The opposite should work.
+- "RUN" button and "PAUSE" will sometimes remain on the "pressed" color state, slowing down the time between clicks will help prevent this.
+
+
 
 

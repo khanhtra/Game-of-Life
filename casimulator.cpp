@@ -185,6 +185,7 @@ int mouseType = message[5];
 	if (count > 0){
 	int pX = xC / (ca->getCellSize() + ca->getCellGap());
 	int pY = yC / (ca->getCellSize() + ca->getCellGap());
+	
 	cout << "X:" << xC << endl;
 	cout << "Y:" << yC << endl;
 	cout << sizeFlag << endl;
@@ -192,6 +193,7 @@ int mouseType = message[5];
 	
 	cout << "width: " << ca->getWidth() << endl;
 	cout << "height: " << ca->getHeight() << endl;
+	
 	
  		if (a->inRectangle(610,60,790,100) == true && mouseType == 1){
 				/*Indicates Button is pressed by color*/			
@@ -265,7 +267,8 @@ int mouseType = message[5];
 				}
 			//Load
 		if (a->inRectangle(610,310,790,350) == true && mouseType == 1){ 
-			delete ca;
+			delete ca;	
+
 					loadFlag = 1;
 					a->setDrawingColor(28,243,127);
 					a->fillRectangle(610, 310, 180, 40);
@@ -274,7 +277,8 @@ int mouseType = message[5];
 					a->repaint();
 					a->fileMessage();	
 					/*Wait for file selection, if successful*/
-					while (ioctl(a->getsockfd(), FIONREAD, &count) == 0){
+					while (i == 0){
+						ioctl(a->getsockfd(), FIONREAD, &count);
 						read(a->getsockfd(), message, count);
 						filePayload = (message[1] << 12)  | (message[2] << 8) | (message[3] << 4) | (message[4]);
 						if (message[5] == 0x0A){
@@ -287,7 +291,6 @@ int mouseType = message[5];
 						second++;
 					
 					}
-					//CellularAutomaton* caLoad = new CellularAutomaton(fileName, 1); //change to test for it to work
 					ca = new CellularAutomaton(fileName, 1);
 					a->clearRectangle(0,0, 600,600);
 					ca->display(*a);	
@@ -376,7 +379,6 @@ int mouseType = message[5];
 			}
 			//Select Size 
 		if (a->inRectangle(620,522,670,577) == true && mouseType == 1){ //1
-	
 			/*Creates blank CA's with pre-determined sizes supplied by a text file*/
 			delete ca;
 			ca = new CellularAutomaton("40by40", 1);

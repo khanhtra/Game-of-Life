@@ -147,7 +147,7 @@ char x;
 	ca->display(*a);
 	//a->repaint();
 
-while (i==0){
+while (i == 0){
 
 ioctl(a->getsockfd(), FIONREAD, &count);
 read(a->getsockfd(), message, count);
@@ -193,6 +193,7 @@ int mouseType = message[5];
 	
 	cout << "width: " << ca->getWidth() << endl;
 	cout << "height: " << ca->getHeight() << endl;
+	cout << fileName[5] << endl;
 	
 	
  		if (a->inRectangle(610,60,790,100) == true && mouseType == 1){
@@ -268,7 +269,6 @@ int mouseType = message[5];
 			//Load
 		if (a->inRectangle(610,310,790,350) == true && mouseType == 1){ 
 			delete ca;	
-
 					loadFlag = 1;
 					a->setDrawingColor(28,243,127);
 					a->fillRectangle(610, 310, 180, 40);
@@ -278,12 +278,12 @@ int mouseType = message[5];
 					a->fileMessage();	
 					/*Wait for file selection, if successful*/
 					while (i == 0){
+						if (message[5] == 0x0A){
+							break;
+							}
 						ioctl(a->getsockfd(), FIONREAD, &count);
 						read(a->getsockfd(), message, count);
 						filePayload = (message[1] << 12)  | (message[2] << 8) | (message[3] << 4) | (message[4]);
-						if (message[5] == 0x0A){
-						break;
-						}
 					}
 						for (int i = 0; i < filePayload ; i++){
 						fileName[i] = message[first++] << 4 | message[second++];
@@ -419,7 +419,7 @@ int mouseType = message[5];
 			}
 			}
 				/*Size 1 Toggle*/
-		if (a->inRectangle(0,0,480,480) == true && mouseType == 1 && sizeFlag == 1){
+		if (a->inRectangle(0,0,490,490) == true && mouseType == 1 && sizeFlag == 1){
 			/*Get (x,y) of CA relative to the "click" position on server*/
 			int pX = xC / (ca->getCellSize() + ca->getCellGap());
 			int pY = yC / (ca->getCellSize() + ca->getCellGap());

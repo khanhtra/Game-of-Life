@@ -36,10 +36,10 @@ _Cellular Automaton Simulation (casimulator.cpp)_
     GUI. Whenever pressed with the exception of "RUN", the buttons will flash a color to indicate is has been clicked on. The "RUN" 
     button will remain green if pressed and the simulation is currently running. Pressing "PAUSE" will stop the ongoing simulation and 
     "RUN" will go back to it's original color. "LOAD" will open a file browser and the selected text file's properties will be shown 
-    on the GUI. "RESET" will reset the simulation back to it's original state from when "LOAD" was performed. "CLEAR" will make the
-    left side of the GUI blank, setting each cell to state 0. The "RANDOM" button randomly assigned each cell state to be either dead 
-    or alive. The code includes a "toggle" logic which lets the user change the state of any desired cell from dead to alive or alive 
-    to dead. The simulation will run based on these updated toggled values.
+    on the GUI. "RESET" will reset the simulation back to it's original state from when "LOAD" was performed if a file WAS loaded, if 
+    not, it will revert back to it's original "default" file. "CLEAR" will make the left side of the GUI blank, setting each cell to state 0. 
+    The "RANDOM" button randomly assigned each cell state to be either dead or alive. The code includes a "toggle" logic which lets the user 
+    change the state of any desired cell from dead to alive or alive to dead. The simulation will run based on these updated toggled values.
 
 
 

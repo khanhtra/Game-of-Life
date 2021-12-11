@@ -3,7 +3,7 @@ _Khanh Tran
 COMS 327_
 
 
-**Cellular Automata Project**
+**Cellular Automata Simulator**
 
 Currently the program creates a GUI of a model of an cellular automata where the user can click on "buttons" that perform the following: 
 

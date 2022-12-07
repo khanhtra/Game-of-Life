@@ -30,7 +30,7 @@ _**The CA simulation screen (left side) when first running the program is left i
 1. Open two terminal windows and use command "cd" to locate files
 
 
-2. Use command "java -jar GraphicsServerv2.jar" in one window, the user should see "Listening on port 7777" on the console
+2. Use command "java -jar GraphicsServerV2.jar" in one window, the user should see "Listening on port 7777" on the console
 
 3. Use command "make" in the other terminal window
 

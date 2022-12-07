@@ -45,8 +45,6 @@ _**The CA simulation screen (left side) when first running the program is left i
 8. Re-run program by using step 5.
 
 
-**READ THIS TA'S**
-I've included a bug about selecting size in my DEV.md file, if I change size from 40 to 41 in the "40by40" file (which I used for setting size logic) it no longer has this problem for some reason. Apart from this minor detail, size should work given that size is 41 and not 40. I've tested other sizes as well and the problem only shows up if it's 40 exclusively.
 
 
 
